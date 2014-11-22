@@ -1,6 +1,7 @@
 require 'rspec'
 require 'date'
 require_relative '../app/models/student'
+require_relative '../app/models/teacher'
 
 
 describe Student, "#name and #age" do
@@ -115,4 +116,11 @@ describe Student, "advanced validations" do
     expect(@student).to_not be_valid
   end
 
+end
+
+describe Student do
+  it "should belong to one teacher" do
+    s = Student.reflect_on_association(:teacher)
+    s.macro.should == :belongs_to
+  end
 end
